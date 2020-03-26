@@ -1,5 +1,26 @@
 <template>
     <div>
+        <v-dialog v-model="insertModal" persistent
+        transition="dialog-bottom-transition"
+        >
+            <v-card>
+                <v-card-title>
+                    Incluir Campeonato
+                </v-card-title>
+                <v-card-text>
+                    <v-text-field v-model="insertData.championshipName" label="Nome do Campeonato"></v-text-field>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="blue darken-1" text @click="insertModal = !insertModal">
+                        Cancelar
+                    </v-btn>
+                    <v-btn color="blue darken-1" text @click="validateInsert()">
+                        Salvar
+                    </v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
         <Menu />
         <v-container>
             <v-row>
@@ -25,7 +46,7 @@
                 </v-col>
             </v-row>
         </v-container>
-        <FloatActionButton @click.native="adicionarCampeonato('teste')"  icon="mdi-plus" />
+        <FloatActionButton @click.native="insertModal = !insertModal"  icon="mdi-plus" />
     </div>
 </template>
 
@@ -40,15 +61,30 @@ export default {
         TitlePage,
         FloatActionButton
     },
+    data: () => {
+        return {
+            insertModal: false,
+            insertData:{
+                championshipName: ''
+            }
+        }
+    },
     computed: {
         ...mapState({
-            campeonatos: state => state.campeonatos.campeonatos
+            campeonatos: state => state.campeonatos
         })
     },
     methods: {
         ...mapMutations({
-            adicionarCampeonato: 'campeonatos/adicionarCampeonato'
-        })
+            adicionarCampeonato: 'adicionarCampeonato'
+        }),
+        validateInsert() {
+            if (this.insertData.championshipName != '') {
+                this.adicionarCampeonato(this.insertData.championshipName);
+                this.insertData.championshipName = '';
+                this.insertModal = !this.insertModal;
+            }
+        }
     }
 }
 </script>

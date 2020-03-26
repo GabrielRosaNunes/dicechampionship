@@ -35,7 +35,6 @@ export default {
             menu: [
                 {to:"/campeonatos",icon:"mdi-clipboard-list-outline",text:"Campeonatos"},
                 {to:"/times",icon:"mdi-format-list-bulleted",text:"Times"},
-                {to:"/partidas",icon:"mdi-clipboard-play-multiple",text:"Partidas"}
             ]
         }
     }

@@ -23,8 +23,9 @@ export default {
     .float-action-btn {
         z-index: 9;
         position: fixed;
-        width:100%;
         text-align: center;
         bottom:20px;
+        left: 48%;
+        right:48%;
     }
 </style>
